@@ -1,21 +1,21 @@
 
-# Tutorial 5
+# Skip The Bins Backend
 
 * *Date Created*: 08 MAR 2022
 * *Last Modification Date*: 08 MAR 2022
 
-## Author
+## Authors
 
 * [Aabhaas Jain](ab336349@dal.ca)
+* [Jaimi Sheta]()
+* [Lokansh Gupta]()
+* [Prashit Patel]()
+* [Vasu Gambda]()
+* [Viverkumar Patel]()
 
 ## Repositories
 
-* *Individual Git URL*: https://git.cs.dal.ca/aabhaas/aabhaas_jain_csci5709
-* *Branch*: t5
-
-
-## Deployment
-* *Application URL*: https://tutorial5aabhaas.herokuapp.com/
+* *Individual Git URL*: https://git.cs.dal.ca/aabhaas/group_14_backend_csci5709
 
 ## Available Scripts
 ### `npm install`
@@ -36,4 +36,3 @@
 ## References
 
 * [Express Folder Structure](https://medium.com/codechef-vit/a-better-project-structure-with-express-and-node-js-c23abc2d736f)
-* [Email regex](https://stackoverflow.com/questions/742451/what-is-the-simplest-regular-expression-to-validate-emails-to-not-accept-them-bl)
