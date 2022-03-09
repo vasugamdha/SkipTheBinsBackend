@@ -1,4 +1,3 @@
-
 # Skip The Bins Backend
 
 * *Date Created*: 08 MAR 2022
@@ -10,7 +9,7 @@
 * [Jaimi Sheta]()
 * [Lokansh Gupta]()
 * [Prashit Patel]()
-* [Vasu Gambda]()
+* [Vasu Gamdha]()
 * [Viverkumar Patel]()
 
 ## Repositories
