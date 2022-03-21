@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.statusCode = 200;
   res.send({
-    "available APIs": "4",
+    "available APIs": "5",
     "GET users": "/users",
     "PUT user": "/update/:id",
     "POST user": "/add",
