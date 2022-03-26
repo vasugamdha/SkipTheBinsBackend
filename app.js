@@ -1,15 +1,23 @@
-const http=require('http');
-const express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
+
 const app = express();
+app.use(express.json());
 
-const port=process.env.PORT||3000;
+const pickupRoutes = require("./routes/pickupRoutes");
 
+const DATABASE_URL =
+  "mongodb+srv://vivekpatel:b00896765@skipthebins.1txlp.mongodb.net/skipthebins";
 
-
-app.use((err, req, res, next) => {
-    res.status(500).send('Internal Server Error')
+mongoose
+  .connect(DATABASE_URL, { useNewUrlParser: true })
+  .then(() => {
+    console.log("Connected to database");
   })
+  .catch((error) => {
+    console.log("Error connecting to database", error);
+  });
 
+app.use("/", pickupRoutes);
 
-const server=http.createServer(app);
-server.listen(port);
+module.exports = app;
