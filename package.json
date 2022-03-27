@@ -1,6 +1,6 @@
 {
   "name": "docker_web_app",
-  "author":"AJ",
+  "author": "AJ",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1087.0",
-    "body-parser": "^1.19.1",
-    "express": "^4.17.2"
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.8"
   }
 }
