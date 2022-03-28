@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 
 const app = express();
 app.use(express.json());
-
+const cors=require('cors');
 const pickupRoutes = require("./routes/pickupRoutes");
-
+const faqRoutes = require("./routes/faqRoutes");
 const DATABASE_URL =
-  "mongodb+srv://vivekpatel:b00896765@skipthebins.1txlp.mongodb.net/skipthebins";
+  "mongodb+srv://root:root@skipthebins.jbqs2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose
   .connect(DATABASE_URL, { useNewUrlParser: true })
@@ -18,6 +18,8 @@ mongoose
     console.log("Error connecting to database", error);
   });
 
-app.use("/", pickupRoutes);
+app.use(cors());
+app.use("/",pickupRoutes);
+app.use("/faq", faqRoutes);
 
 module.exports = app;
