@@ -7,9 +7,7 @@ app.use(express.json());
 app.use(cors());
 
 const pickupRoutes = require("./routes/pickupRoutes");
-const userFetchAdminRoutes = require("./routes/userFetchAdminRouts");
-const vendorFetchAdminRoutes = require("./routes/vendorFetchAdminRouts");
-const rewardFetchAdminRoutes = require("./routes/rewardFetchAdminRouts");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 
 const DATABASE_URL =
   "mongodb+srv://root:root@cluster0.rv5uh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -24,8 +22,5 @@ mongoose
   });
 
 app.use("/", pickupRoutes);
-app.use("/admin", userFetchAdminRoutes);
-app.use("/admin", vendorFetchAdminRoutes);
-app.use("/admin", rewardFetchAdminRoutes);
-
+app.use("/admin", analyticsRoutes);
 module.exports = app;
