@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const userPickupSchema = {
   _id: mongoose.Schema.Types.ObjectId,
   userId: { type: String },
-  pickupId: { type: String },
-  date: { type: Date },
+  pickupId: { type: Number },
+  date: { type: String },
   area: { type: String },
   slot: { type: String },
   vendor: { type: String },
