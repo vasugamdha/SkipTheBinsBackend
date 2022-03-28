@@ -8,4 +8,6 @@ router.post("/schedule", userPickupController.schedulePickups);
 
 router.delete("/cancel/:id", userPickupController.cancelPickup);
 
+router.get("/pickups/status", userPickupController.trackStatus);
+
 module.exports = router;
