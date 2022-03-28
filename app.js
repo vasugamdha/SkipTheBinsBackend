@@ -5,7 +5,6 @@ const databaseConnection = require("./middlewares/databaseConnection");
 app.use(express.json());
 app.use(cors());
 
-const pickupRoutes = require("./routes/pickupRoutes");
 const faqRoutes = require("./routes/faqRoutes");
 const userPickupRoutes = require("./routes/userPickupRoutes");
 const vendorScheduleRoutes = require("./routes/vendorScheduleRoutes");
