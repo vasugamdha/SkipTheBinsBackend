@@ -4,7 +4,6 @@ const vendorSchedulesSchema = {
   _id: mongoose.Schema.Types.ObjectId,
   scheduleId: { type: String },
   vendorId: { type: String },
-  trackingId: { type: String },
   batchNo: { type: String },
   status: { type: String },
   date: { type: String },
@@ -12,4 +11,4 @@ const vendorSchedulesSchema = {
   slot: { type: String },
 };
 
-module.exports = mongoose.model("VendorSchedules", vendorSchedulesSchema);
+module.exports = mongoose.model("vendorSchedules", vendorSchedulesSchema);
