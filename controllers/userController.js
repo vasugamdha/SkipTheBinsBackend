@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
-const { transporter } = require("../mailer/transporter.js");
+const transporter = require("../mailer/transporter.js");
 
 const User = require("../models/userModel.js");
 
@@ -14,7 +14,8 @@ const verifyAccount = async (req, res) => {
       return res.status(404).send({ message: "User doesn't exist." });
     userExists.isVerified = true;
     await userExists.save();
-    res.status(200).json({ message: "Account Verified." });
+    htmlContent ="<html><body><h1>Account Verified! </h1> <a href='/login' variant='success'>Click here to Login</Button></body></html>";
+    res.status(200).send(htmlContent);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." });
   }
@@ -109,9 +110,7 @@ const signup = async (req, res) => {
       from: process.env.FROM_EMAIL,
       to: email,
       subject: "STB Account Verification",
-      html: `<div>Your account has been registered with us. Please click on the below link to verify your email. <a href=${
-        process.env.APP_URL
-      }/user/verify/${token}> Click here to verify </a>
+      html: `<div>Your account has been registered with us. Please click on the below link to verify your email. <a href=https://skip-the-bins-backend.herokuapp.com/api/profile/verify/${token}> Click here to verify </a>
             <p>${
               role === "vendor"
                 ? "Your vendor account creation request has also been sent successfully. Please wait for admin approval."
