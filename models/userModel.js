@@ -21,4 +21,4 @@ const userSchema = mongoose.Schema({
 
 const User = mongoose.model('group14User', userSchema);
 
-export default User;
+module.exports = User;

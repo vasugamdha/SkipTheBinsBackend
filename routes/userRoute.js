@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { signup, login, editProfile, changePassword, deleteProfile, verifyAccount } = require("../controllers/userController.js");
-const auth = require("../middleware/authMiddleware.js");
+const auth = require("../middlewares/authMiddleware.js");
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.patch('/:id/editProfile',auth, editProfile)
 router.patch('/:id/changePassword',auth, changePassword)
 router.delete('/:id/deleteProfile',auth , deleteProfile)
 
-export default router;
+module.exports = router;

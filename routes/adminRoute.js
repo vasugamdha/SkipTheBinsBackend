@@ -1,6 +1,6 @@
 const express = require("express");
 const { getUnapprovedVendorList, approveVendorProfile, getVendorDeletionRequestList, requestVendorDeletion, declineVendorDeletion, declineVendorCreation } = require("../controllers/adminController.js");
-const auth = require("../middleware/authMiddleware.js");
+const auth = require("../middlewares/authMiddleware.js");
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router.delete('/:id/requestDeletion', auth, requestVendorDeletion);
 router.delete('/:id/declineVendorCreation', auth, declineVendorCreation);
 router.patch('/:id/declineVendorDeletion', auth, declineVendorDeletion);
 
-export default router;
+module.exports = router;
