@@ -12,4 +12,4 @@ const vendorSchedulesSchema = {
   slot: { type: String },
 };
 
-module.exports = mongoose.model("VendorSchedules", vendorSchedulesSchema);
+module.exports = mongoose.model("vendorSchedules", vendorSchedulesSchema);
