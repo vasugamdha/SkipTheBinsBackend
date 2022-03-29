@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const { transporter } = require("../mailer/transporter.js");
+const transporter = require("../mailer/transporter.js");
 
 const User = require("../models/userModel.js");
 
