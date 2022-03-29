@@ -3,24 +3,25 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
+const databaseConnection = require("./middlewares/databaseConnection");
 app.use(express.json());
 app.use(cors());
 
-const pickupRoutes = require("./routes/pickupRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const faqRoutes = require("./routes/faqRoutes");
+const userPickupRoutes = require("./routes/userPickupRoutes");
+const vendorScheduleRoutes = require("./routes/vendorScheduleRoutes");
+const areaRoutes = require("./routes/areaRoutes");
+const contactUsRoutes = require("./routes/contactUsRoutes");
 
-const DATABASE_URL =
-  "mongodb+srv://root:root@cluster0.rv5uh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+databaseConnection();
 
-mongoose
-  .connect(DATABASE_URL, { useNewUrlParser: true })
-  .then(() => {
-    console.log("Connected to database");
-  })
-  .catch((error) => {
-    console.log("Error connecting to database", error);
-  });
+const rootRoute = "/api/";
+app.use(rootRoute + "faq", faqRoutes);
+app.use(rootRoute + "user", userPickupRoutes);
+app.use(rootRoute + "vendor", vendorScheduleRoutes);
+app.use(rootRoute + "/admin", analyticsRoutes);
+app.use(rootRoute, areaRoutes);
+app.use(rootRoute, contactUsRoutes);
 
-app.use("/", pickupRoutes);
-app.use("/admin", analyticsRoutes);
 module.exports = app;
