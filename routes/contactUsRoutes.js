@@ -11,6 +11,6 @@ router.post("/query/add", controller.submitQuery);
 router.get("/vendor", controller.getVendors);
 router.post("/vendor/add", controller.addVendor);
 router.post("/vendor/update", controller.updateVendor);
-router.delete("/vendor/delete", controller.deleteVendor);
+router.post("/vendor/delete", controller.deleteVendor);
 
 module.exports = router;

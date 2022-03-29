@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 var queryModel = require("../models/contactUsQuery");
 var vendorModel = require("../models/contactUsVendor");
+const { param } = require("../routes/contactUsRoutes");
 
 //function to fetch all queries in GET call
 const getQueries = (req, res) => {
@@ -141,7 +142,7 @@ const updateVendor = (req, res) => {
 
 const deleteVendor = (req, res) => {
   vendorModel
-    .deleteOne({ _id: req.body._id })
+    .findByIdAndDelete(req.body._id)
     .then((result) => {
       return res.status(201).json({
         success: true,
