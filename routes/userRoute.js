@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require("express");
 
-import { signup, login, editProfile, changePassword, deleteProfile, verifyAccount } from '../controllers/userController.js';
-import auth from '../middleware/authMiddleware.js';
+const { signup, login, editProfile, changePassword, deleteProfile, verifyAccount } = require("../controllers/userController.js");
+const auth = require("../middleware/authMiddleware.js");
 
 const router = express.Router();
 

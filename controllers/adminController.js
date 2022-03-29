@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-import { transporter } from '../mailer/transporter.js'
+const { transporter } = require("../mailer/transporter.js");
 
-import User from '../models/userModel.js';
+const User = require("../models/userModel.js");
 
 export const getUnapprovedVendorList = async (req, res) => {
     try {

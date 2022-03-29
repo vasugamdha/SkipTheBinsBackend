@@ -1,6 +1,6 @@
-import express from 'express';
-import { getUnapprovedVendorList, approveVendorProfile, getVendorDeletionRequestList, requestVendorDeletion, declineVendorDeletion, declineVendorCreation } from '../controllers/adminController.js';
-import auth from '../middleware/authMiddleware.js';
+const express = require("express");
+const { getUnapprovedVendorList, approveVendorProfile, getVendorDeletionRequestList, requestVendorDeletion, declineVendorDeletion, declineVendorCreation } = require("../controllers/adminController.js");
+const auth = require("../middleware/authMiddleware.js");
 
 const router = express.Router();
 
