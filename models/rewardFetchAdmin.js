@@ -5,7 +5,7 @@ const rewardFetchAdminSchema = {
     rewardId: { type: String },
     vendorName: { type: String },
     userCount: { type: String },
-    status: { type: String }
+    status: { type: Boolean }
 };
 
 module.exports = mongoose.model("RewardFetchAdmin", rewardFetchAdminSchema);
