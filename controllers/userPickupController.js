@@ -20,7 +20,7 @@ const getPickups = async (req, res) => {
     })
     .catch((err) => {
       res.statusCode = 500;
-      res.send({ message: "Pickups retrival failed!" });
+      res.send({ message: "Pickups retrieval failed!" });
     });
 };
 
@@ -84,8 +84,37 @@ const cancelPickup = async (req, res) => {
   }
 };
 
+const trackStatus = (req, res) => {
+  vendorSchedules
+    .find(req.query)
+    .exec()
+    .then((result) => {
+      try {
+        if (!result || result.length === 0) {
+          res.statusCode = 404;
+          res.send({ message: "Pickup status not found!" });
+        } else {
+          res.statusCode = 200;
+          res.send({
+            message: "Status retrieved",
+            success: true,
+            status: result[0].status,
+          });
+        }
+      } catch (err) {
+        res.statusCode = 500;
+        res.send({ message: "Status retrieval failed!" });
+      }
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send({ message: "Something went wrong!" });
+    });
+};
+
 module.exports = {
-    getPickups,
-    schedulePickups,
-    cancelPickup
-}
+  getPickups,
+  schedulePickups,
+  cancelPickup,
+  trackStatus,
+};

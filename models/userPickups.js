@@ -14,5 +14,4 @@ const userPickupSchema = {
   boxQty: { type: Number },
   address: { type: String },
 };
-
 module.exports = mongoose.model("UserPickups", userPickupSchema);
