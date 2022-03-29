@@ -18,6 +18,7 @@ const getQueries = (req, res) => {
       }
     })
     .catch((error) => {
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -49,6 +50,7 @@ const submitQuery = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -70,6 +72,7 @@ const getVendors = (req, res) => {
       }
     })
     .catch((error) => {
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -101,6 +104,7 @@ const addVendor = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -126,6 +130,7 @@ const updateVendor = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -133,7 +138,7 @@ const updateVendor = (req, res) => {
     });
 };
 
-////function to delete vendor details
+//function to delete vendor details
 const deleteVendor = (req, res) => {
   vendorModel
     .findByIdAndDelete(req.body._id)
@@ -144,6 +149,7 @@ const deleteVendor = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
