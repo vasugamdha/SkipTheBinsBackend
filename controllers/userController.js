@@ -107,7 +107,7 @@ const signup = async (req, res) => {
     });
 
     const mailOptions = {
-      from: process.env.FROM_EMAIL,
+      from: "skipthebins@gmail.com",
       to: email,
       subject: "STB Account Verification",
       html: `<div>Your account has been registered with us. Please click on the below link to verify your email. <a href=https://skip-the-bins-backend.herokuapp.com/api/profile/verify/${token}> Click here to verify </a>

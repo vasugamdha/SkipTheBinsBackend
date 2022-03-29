@@ -15,7 +15,6 @@
     "moment": "^2.29.1",
     "mongoose": "^6.2.8",
     "bcryptjs": "^2.4.3",
-    "dotenv": "^16.0.0",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.7.3",
     "nodemon": "^2.0.15",
