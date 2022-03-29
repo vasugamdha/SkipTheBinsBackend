@@ -138,21 +138,10 @@ const deleteSchedule = async (req, res) => {
 const updateStatus = (req, res) => {
   try {
     const _id = req.body._id;
-    const scheduleId = req.body.scheduleId;
-    const vendorId = req.body.vendorId;
-    const batchNo = req.body.batchNo;
     const status = req.body.status;
-    const date = req.body.date;
-    const area = req.body.area;
-    const slot = req.body.slot;
+
     const data = {
-      scheduleId,
-      vendorId,
-      batchNo,
       status,
-      date,
-      area,
-      slot,
     };
     vendorSchedules.findByIdAndUpdate(_id, data, (err, schedule) => {
       if (err) {
