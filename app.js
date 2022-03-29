@@ -20,7 +20,7 @@ const rootRoute = "/api/";
 app.use(rootRoute + "faq", faqRoutes);
 app.use(rootRoute + "user", userPickupRoutes);
 app.use(rootRoute + "vendor", vendorScheduleRoutes);
-app.use(rootRoute + "/admin", analyticsRoutes);
+app.use(rootRoute + "admin", analyticsRoutes);
 app.use(rootRoute, areaRoutes);
 app.use(rootRoute, contactUsRoutes);
 
