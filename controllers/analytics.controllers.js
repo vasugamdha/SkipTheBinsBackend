@@ -1,5 +1,5 @@
 const RewardFetchAdmin = require("../models/rewardFetchAdmin")
-const UserFetchAdmin = require("../models/userFetchAdmin");
+const UserFetchAdmin = require("../models/userModel");
 
 async function getAllUsersAdmin(req, res) {
     try {
