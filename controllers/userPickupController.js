@@ -1,4 +1,5 @@
 const userPickups = require("../models/userPickups");
+const vendorSchedules = require("../models/vendorSchedules");
 const mongoose = require("mongoose");
 
 const getPickups = async (req, res) => {
