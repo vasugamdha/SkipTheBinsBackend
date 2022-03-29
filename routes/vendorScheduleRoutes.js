@@ -4,12 +4,14 @@ const vendorScheduleController = require("../controllers/vendorScheduleControlle
 
 router.get("/schedules", vendorScheduleController.getSchedule);
 
-router.post("/create", vendorScheduleController.createSChedule);
+router.post("/create", vendorScheduleController.createSchedule);
 
 router.put("/update/:id", vendorScheduleController.updateSchedule);
 
 router.delete("/delete/:id", vendorScheduleController.deleteSchedule);
 
 router.put("/schedules/update", vendorScheduleController.updateStatus);
+
+router.post("/schedules/add", vendorScheduleController.addSchedule);
 
 module.exports = router;
