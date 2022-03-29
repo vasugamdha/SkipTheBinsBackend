@@ -10,4 +10,6 @@ router.delete("/cancel/:id", userPickupController.cancelPickup);
 
 router.get("/pickups/status", userPickupController.trackStatus);
 
+router.put("/update/:id", userPickupController.updatePickup);
+
 module.exports = router;

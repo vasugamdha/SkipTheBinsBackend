@@ -113,9 +113,33 @@ const trackStatus = (req, res) => {
     });
 };
 
+const updatePickup = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedPickup = {
+      wasteType: req.body.wasteType,
+      boxQty: req.body.boxQty,
+      wasteQty: req.body.wasteQty
+    }
+    userPickups.findOneAndUpdate({ pickupId: id }, updatedPickup, (err, pickup) => {
+      if (err) {
+        res.statusCode = 500;
+        res.send({ message: "Pickup update failed!" });
+      } else {
+        res.statusCode = 200;
+        res.send({ message: "Pickup updated successfully", success: true });
+      }
+    });
+  } catch (err) {
+    res.statusCode = 500;
+    res.send({ message: "Something went wrong!" });
+  }
+};
+
 module.exports = {
   getPickups,
   schedulePickups,
   cancelPickup,
   trackStatus,
+  updatePickup
 };
