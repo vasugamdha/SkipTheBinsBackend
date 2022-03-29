@@ -35,7 +35,7 @@ const deleteRequest = (req, res) => {
 const approveRequest = (req, res) => {
     if (req.body.type == "update") {
         faq.findByIdAndUpdate(req.body.faqId, { question: req.body.newQuestion, answer: req.body.newAnswer }).then(_ => {
-            faqRequest.findByIdAndDelete(JSON.stringify(req.body._id)).then(_ => {
+            faqRequest.findByIdAndDelete(req.body._id).then(_ => {
                 res.status(200).send("Request successfully updated");
             })
         }).catch(err => {
@@ -45,7 +45,7 @@ const approveRequest = (req, res) => {
         })
     } else if (req.body.type == "add") {
         faq.create({ question: req.body.newQuestion, answer: req.body.newAnswer }).then(_ => {
-            faqRequest.findByIdAndDelete(JSON.stringify(req.body._id)).then(_ => {
+            faqRequest.findByIdAndDelete(req.body._id).then(_ => {
                 res.status(200).send("Request successfully added");
             })
         }).catch(err => {
@@ -55,7 +55,7 @@ const approveRequest = (req, res) => {
         })
     } else if (req.body.type == "delete") {
         faq.findByIdAndDelete(req.body.faqId).then(_ => {
-            faqRequest.findByIdAndDelete(JSON.stringify(req.body._id)).then(_ => {
+            faqRequest.findByIdAndDelete(req.body._id).then(_ => {
                 res.status(200).send("Request successfully added");
             })
         }).catch(err => {
