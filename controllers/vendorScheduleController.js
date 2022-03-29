@@ -52,7 +52,7 @@ const createSChedule = async (req, res) => {
           scheduleId: scheduleCount,
           vendorId: req.body.vendorId,
           vendor: req.body.vendor,
-          batchNo: `BATCH${scheduleCount + 1}`,
+          batchNo: `BATCH${scheduleCount}`,
           status: "Waste Pick-up Scheduled",
           date: fromDate,
           area: slots[i].area,
