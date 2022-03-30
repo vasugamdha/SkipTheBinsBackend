@@ -1,3 +1,5 @@
+// @author : Vasu Gamdha (Group 14)
+
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({

@@ -1,3 +1,5 @@
+// @author : Vasu Gamdha (Group 14)
+
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel.js");
 
