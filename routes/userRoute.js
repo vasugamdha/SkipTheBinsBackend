@@ -1,3 +1,5 @@
+// @author : Vasu Gamdha (Group 14)
+
 const express = require("express");
 
 const { signup, login, editProfile, changePassword, deleteProfile, verifyAccount } = require("../controllers/userController.js");
