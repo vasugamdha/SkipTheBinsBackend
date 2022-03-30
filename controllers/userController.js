@@ -1,3 +1,5 @@
+// @author : Vasu Gamdha (Group 14)
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
@@ -14,7 +16,7 @@ const verifyAccount = async (req, res) => {
       return res.status(404).send({ message: "User doesn't exist." });
     userExists.isVerified = true;
     await userExists.save();
-    htmlContent ="<html><body><h1>Account Verified! </h1> <a href='/login' variant='success'>Click here to Login</Button></body></html>";
+    htmlContent ="<html><body><h1>Account Verified! </h1> <a href='https://skipthebins.herokuapp.com/login'>Click here to Login</Button></body></html>";
     res.status(200).send(htmlContent);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." });
@@ -107,7 +109,7 @@ const signup = async (req, res) => {
     });
 
     const mailOptions = {
-      from: process.env.FROM_EMAIL,
+      from: "skipthebins@gmail.com",
       to: email,
       subject: "STB Account Verification",
       html: `<div>Your account has been registered with us. Please click on the below link to verify your email. <a href=https://skip-the-bins-backend.herokuapp.com/api/profile/verify/${token}> Click here to verify </a>
