@@ -1,3 +1,5 @@
+// Authors: Prashit Patel (B00896717), Vivekkumar Patel (B00896765)
+
 const userPickups = require("../models/userPickups");
 const vendorSchedules = require("../models/vendorSchedules");
 const mongoose = require("mongoose");

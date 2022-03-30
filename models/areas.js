@@ -1,3 +1,5 @@
+// Author: Prashit Patel (B00896717)
+
 const mongoose = require("mongoose");
 
 const areaSchema = {
