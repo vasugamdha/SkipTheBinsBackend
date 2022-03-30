@@ -1,3 +1,5 @@
+// Authors: Prashit Patel (B00896717), Vivekkumar Patel (B00896765)
+
 const vendorSchedules = require("../models/vendorSchedules");
 const moment = require("moment");
 const mongoose = require("mongoose");
