@@ -1,3 +1,4 @@
+// Author : Aabhaas Jain
 const faq = require('../models/faqModel');
 
 const getFaq = (req, res) => {

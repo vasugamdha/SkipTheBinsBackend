@@ -1,3 +1,4 @@
+// Author : Lokansh Gupta
 const mongoose = require("mongoose");
 
 var queryModel = require("../models/contactUsQuery");
