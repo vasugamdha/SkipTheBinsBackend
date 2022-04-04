@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 
 var queryModel = require("../models/contactUsQuery");
 var vendorModel = require("../models/contactUsVendor");
-const { param } = require("../routes/contactUsRoutes");
 
 //function to fetch all queries in GET call
 const getQueries = (req, res) => {
