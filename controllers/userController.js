@@ -36,18 +36,18 @@ const login = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (!userExists)
-      return res.status(404).json({ message: "User doesn't exist." });
+      return res.status(404).json({ message: "This email address is not linked with any account!" });
 
     if (
       userExists.role === "vendor" &&
       !userExists.isApprovedByAdminIfVendorRole
     )
       return res
-        .status(404)
-        .json({ message: "Your Vendor Id is not yet verified by Admin." });
+        .status(401)
+        .json({ message: "Please, wait for admin to approve your account." });
 
     if (!userExists.isVerified)
-      return res.status(400).json({ message: "Account is not verified." });
+      return res.status(400).json({ message: "Please, verify your account!" });
 
     const isPasswordCorrect = await bcrypt.compare(
       password,
@@ -55,7 +55,7 @@ const login = async (req, res) => {
     );
 
     if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Invalid credentials." });
+      return res.status(400).json({ message: "Either email or password is incorrect." });
 
     const token = jwt.sign(
       { email: userExists.email, id: userExists._id },
@@ -89,7 +89,7 @@ const signup = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (userExists)
-      return res.status(400).json({ message: "User already exist." });
+      return res.status(400).json({ message: "This email address is already linked with an account! Try logging in!" });
 
     if (password !== confirmPassword)
       res.status(400).json({ message: "Passwords don't match." });
@@ -147,7 +147,7 @@ const editProfile = async (req, res) => {
 
   try {
     if (!mongoose.Types.ObjectId.isValid(_id))
-      return res.status(404).send("No user with that id");
+      return res.status(404).send("The user doesn't exist.");
 
     const updatedUserDetails = await User.findByIdAndUpdate(
       _id,
@@ -169,7 +169,7 @@ const changePassword = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (!userExists)
-      return res.status(400).json({ message: "User doesn't exist." });
+      return res.status(400).json({ message: "The user doesn't exist." });
 
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
@@ -179,7 +179,7 @@ const changePassword = async (req, res) => {
     if (!isPasswordCorrect)
       return res
         .status(400)
-        .json({ message: "Current password is incorrect." });
+        .json({ message: "Your current password is incorrect." });
 
     const isNewSameAsCurrent = await bcrypt.compare(
       newPassword,
@@ -189,7 +189,7 @@ const changePassword = async (req, res) => {
     if (isNewSameAsCurrent)
       return res
         .status(400)
-        .json({ message: "New password is same as current password." });
+        .json({ message: "Please enter a new password different from your current password!" });
 
     const newHashedPassword = await bcrypt.hash(newPassword, 12);
 
