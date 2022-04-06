@@ -1,5 +1,6 @@
-const RewardFetchAdmin = require("../models/rewardFetchAdmin")
+const RewardFetchAdmin = require("../models/voucherDetails")
 const UserFetchAdmin = require("../models/userModel");
+const {log} = require("nodemon/lib/utils");
 
 async function getAllUsersAdmin(req, res) {
     try {
@@ -36,6 +37,7 @@ async function getAllRewardsAdmin(req, res) {
                 success: true,
                 data: RewardFetchAdminData,
             }
+            console.log(RewardFetchAdminData);
             res.status(200).send(resultResponse)
         } else {
             const errorResponse = {
