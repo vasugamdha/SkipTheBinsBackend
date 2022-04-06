@@ -33,9 +33,9 @@ app.use(rootRoute, areaRoutes);
 app.use(rootRoute, contactUsRoutes);
 app.use(rootRoute, rewardStoreRoutes);
 
-app.use(rootRoute + "adminActions", vendorRoutes);
-app.use(rootRoute + "profile", userRoutes);
-app.use("/", (req, res) => {
-  res.send("Welcome to Skip the Bins!!");
+app.use(rootRoute + 'adminActions', vendorRoutes);
+app.use(rootRoute + 'profile', userRoutes);
+app.use('/', (req, res) => {
+    res.send('Welcome to Skip the Bins!!');
 });
 module.exports = app;

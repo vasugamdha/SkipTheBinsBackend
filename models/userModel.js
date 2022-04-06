@@ -18,7 +18,8 @@ const userSchema = mongoose.Schema({
     isApprovedByAdminIfVendorRole: { type: Boolean },
     isProfileDeletionRequested: { type: Boolean },
     isVerified: {type:Boolean,default: false},
-    verificationCode: {type: String,required:true}
+    verificationCode: {type: String,required:true},
+    points: {type: Number, required: false}
 });
 
 const User = mongoose.model('group14User', userSchema);

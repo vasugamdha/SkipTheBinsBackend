@@ -15,5 +15,6 @@ const userPickupSchema = {
   wasteQty: { type: Number },
   boxQty: { type: Number },
   address: { type: String },
+  points: { type: Number },
 };
 module.exports = mongoose.model("UserPickups", userPickupSchema);

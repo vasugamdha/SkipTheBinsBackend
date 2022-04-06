@@ -3,6 +3,9 @@
 const vendorSchedules = require("../models/vendorSchedules");
 const moment = require("moment");
 const mongoose = require("mongoose");
+const userPickups = require("../models/userPickups");
+const User = require("../models/userModel.js");
+const rewardPointsModel = require("../models/rewardPoints");
 
 const getSchedule = async (req, res) => {
   vendorSchedules
@@ -137,14 +140,66 @@ const deleteSchedule = async (req, res) => {
   }
 };
 
-const updateStatus = (req, res) => {
+const updateStatus = async (req, res) => {
   try {
     const _id = req.body._id;
     const status = req.body.status;
-
+    const batchNo = req.body.batchNo;
     const data = {
       status,
     };
+
+    if (status === "Waste Recycled") {
+      const admin = await User.findOne({ role: "admin" });
+      const points = admin?.points;
+
+      userPickups.find({ batchNo: batchNo }, (err, pickups) => {
+        if (err) {
+          console.log(err);
+        } else {
+          //foreach pickup - update
+          for (var i = 0; i < pickups.length; i++) {
+            
+            userPickups.findOneAndUpdate(
+              { pickupId: pickups[i].pickupId },
+              { points: pickups[i].wasteQty * points },
+              (err, pickup) => {
+                if (err) {
+                  console.log(error);
+                }
+              }
+            );
+            const currentPickup = pickups[i];
+            rewardPointsModel
+              .find({ customerId: pickups[i].userId })
+              .exec()
+              .then((existingPoints) => {
+                if (existingPoints.length > 0) {
+                  console.log(existingPoints[0]._id.toString())
+                  rewardPointsModel.findByIdAndUpdate(
+                    existingPoints[0]._id.toString(),
+                    { points: (existingPoints[0].points + (currentPickup.wasteQty * points)) }
+                    ).then((res) => {
+                    console.log(res);
+                  }).catch((err) => {
+                    console.log(err);
+                  });
+                } else {
+                  console.log("new")
+                  const newRewardPoints = new rewardPointsModel({
+                    _id: mongoose.Types.ObjectId(),
+                    customerId: currentPickup.userId,
+                    points: currentPickup.wasteQty * points,
+                  });
+
+                  newRewardPoints.save();
+                }
+              });
+          }
+        }
+      });
+    }
+
     vendorSchedules.findByIdAndUpdate(_id, data, (err, schedule) => {
       if (err) {
         res.statusCode = 500;
@@ -155,6 +210,7 @@ const updateStatus = (req, res) => {
       }
     });
   } catch (err) {
+    console.log(err);
     res.statusCode = 500;
     res.send({ message: "Something went wrong!" });
   }
@@ -167,7 +223,7 @@ const addSchedule = async (req, res) => {
       .sort({ field: "asc", _id: -1 })
       .limit(1);
     const scheduleCount = lastSchedule ? lastSchedule.scheduleId + 1 : 1;
-    
+
     const schedule = new vendorSchedules({
       _id: mongoose.Types.ObjectId(),
       scheduleId: scheduleCount,
