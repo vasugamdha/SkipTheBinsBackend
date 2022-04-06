@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const querySchema = {
   _id: mongoose.Schema.Types.ObjectId,
   companyName: { type: String },
-  value: { type: String },
-  points: { type: String },
+  value: { type: Number },
+  points: { type: Number },
   customerId: { type: String },
   datePurchased: { type: String },
 };
