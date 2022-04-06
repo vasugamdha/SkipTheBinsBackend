@@ -1,23 +1,24 @@
 // Author : Aabhaas Jain
 const express = require("express");
 const router = express.Router();
-const faqController = require('../controllers/faqController');
-const faqRequestController = require('../controllers/faqRequestController');
+const faqController = require("../controllers/faqController");
+const faqRequestController = require("../controllers/faqRequestController");
+const auth = require("../middlewares/authMiddleware.js");
 
 router.get("/", faqController.getFaq);
 
-router.post("/", faqController.createFaq);
+router.post("/", auth, faqController.createFaq);
 
-router.put("/:id", faqController.updateFaq);
+router.put("/:id", auth, faqController.updateFaq);
 
-router.delete("/:id", faqController.deleteFaq);
+router.delete("/:id", auth, faqController.deleteFaq);
 
-router.get("/requests", faqRequestController.getRequests);
+router.get("/requests", auth, faqRequestController.getRequests);
 
-router.post("/create-request", faqRequestController.createRequest);
+router.post("/create-request", auth, faqRequestController.createRequest);
 
-router.delete("/deny-request/:id", faqRequestController.deleteRequest);
+router.delete("/deny-request/:id", auth, faqRequestController.deleteRequest);
 
-router.post("/approve-request", faqRequestController.approveRequest);
+router.post("/approve-request", auth, faqRequestController.approveRequest);
 
 module.exports = router;
