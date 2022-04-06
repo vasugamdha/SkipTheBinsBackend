@@ -21,18 +21,19 @@ const contactUsRoutes = require("./routes/contactUsRoutes");
 const rewardStoreRoutes = require("./routes/rewardStoreRoutes");
 const userRoutes = require("./routes/userRoute.js");
 const vendorRoutes = require("./routes/adminRoute.js");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 databaseConnection();
 
 const rootRoute = "/api/";
 app.use(rootRoute + "faq", faqRoutes);
+app.use(rootRoute + "notification", notificationRoutes);
 app.use(rootRoute + "user", userPickupRoutes);
 app.use(rootRoute + "vendor", vendorScheduleRoutes);
 app.use(rootRoute + "admin", analyticsRoutes);
 app.use(rootRoute, areaRoutes);
 app.use(rootRoute, contactUsRoutes);
 app.use(rootRoute, rewardStoreRoutes);
-
 app.use(rootRoute + "adminActions", vendorRoutes);
 app.use(rootRoute + "profile", userRoutes);
 app.use("/", (req, res) => {
