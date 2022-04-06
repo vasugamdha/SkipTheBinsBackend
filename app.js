@@ -34,6 +34,7 @@ app.use(rootRoute + "admin", analyticsRoutes);
 app.use(rootRoute, areaRoutes);
 app.use(rootRoute, contactUsRoutes);
 app.use(rootRoute, rewardStoreRoutes);
+
 app.use(rootRoute + "adminActions", vendorRoutes);
 app.use(rootRoute + "profile", userRoutes);
 app.use("/", (req, res) => {

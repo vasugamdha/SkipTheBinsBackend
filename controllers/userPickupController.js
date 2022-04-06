@@ -50,6 +50,7 @@ const schedulePickups = async (req, res) => {
       vendor: req.body.vendor,
       batchNo: req.body.batchNo,
       address: req.body.address,
+      points: 0
     });
 
     pickup

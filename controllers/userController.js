@@ -16,7 +16,13 @@ const verifyAccount = async (req, res) => {
       return res.status(404).send({ message: "User doesn't exist." });
     userExists.isVerified = true;
     await userExists.save();
-    htmlContent ="<html><body><h1>Account Verified! </h1> <a href='https://skipthebins.herokuapp.com/login'>Click here to Login</Button></body></html>";
+    htmlContent =`<html><head><meta http-equiv='Refresh' content="0; url='https://skipthebins.herokuapp.com/login'" /><link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous"
+  />
+    </head><body><div className="border d-flex align-items-center justify-content-center"><h1>Account Verified!</h1> <h5>If not redirected, <Button href='https://skipthebins.herokuapp.com/login'>Click here to Login</Button></h5></div></body></html>`;
     res.status(200).send(htmlContent);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." });
