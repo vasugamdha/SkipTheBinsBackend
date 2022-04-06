@@ -8,6 +8,7 @@ const querySchema = {
   mobile: { type: String },
   querySubject: { type: String },
   query: { type: String },
+  points: {type: Number}
 };
 
 module.exports = mongoose.model("ContactUsQuery", querySchema);

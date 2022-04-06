@@ -1,4 +1,4 @@
-// Author : Lokansh Gupta
+// Author : Lokansh Gupta, Prashit Patel
 const express = require("express");
 const controller = require("../controllers/rewardStore.controllers");
 
@@ -15,5 +15,9 @@ router.get("/voucher", controller.getVouchers);
 router.post("/voucher/add", controller.addVoucher);
 router.post("/voucher/update", controller.updateVoucher);
 router.post("/voucher/delete", controller.deleteVoucher);
+router.put(
+  "/reward/updateComplaintPoints",
+  controller.updateComplaintRewardPoints
+);
 
 module.exports = router;

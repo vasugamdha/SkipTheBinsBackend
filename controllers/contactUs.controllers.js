@@ -41,6 +41,7 @@ const submitQuery = (req, res) => {
     mobile,
     querySubject,
     query,
+    points: 0
   });
 
   newQuery
