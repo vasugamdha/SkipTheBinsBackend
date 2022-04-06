@@ -7,5 +7,6 @@ const router = express.Router();
 //Queries API call requests
 router.get("/voucher/allDetails", controller.getVoucherDetails);
 router.get("/reward/getPoints", controller.getRewardPoints);
+router.post("/reward/updatePoints", controller.updateRewardPoints);
 
 module.exports = router;

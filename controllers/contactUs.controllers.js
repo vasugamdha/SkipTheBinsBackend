@@ -31,6 +31,7 @@ const submitQuery = (req, res) => {
   var name = req.body.name;
   var email = req.body.email;
   var mobile = req.body.mobile;
+  var querySubject = req.body.querySubject;
   var query = req.body.query;
 
   const newQuery = new queryModel({
@@ -38,6 +39,7 @@ const submitQuery = (req, res) => {
     name,
     email,
     mobile,
+    querySubject,
     query,
   });
 
