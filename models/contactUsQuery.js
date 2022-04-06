@@ -1,3 +1,4 @@
+// Author : Lokansh Gupta
 const mongoose = require("mongoose");
 
 const querySchema = {
@@ -5,6 +6,7 @@ const querySchema = {
   name: { type: String },
   email: { type: String },
   mobile: { type: String },
+  querySubject: { type: String },
   query: { type: String },
 };
 

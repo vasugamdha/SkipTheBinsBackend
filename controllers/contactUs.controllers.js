@@ -1,3 +1,4 @@
+// Author : Lokansh Gupta
 const mongoose = require("mongoose");
 
 var queryModel = require("../models/contactUsQuery");
@@ -17,7 +18,7 @@ const getQueries = (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -30,6 +31,7 @@ const submitQuery = (req, res) => {
   var name = req.body.name;
   var email = req.body.email;
   var mobile = req.body.mobile;
+  var querySubject = req.body.querySubject;
   var query = req.body.query;
 
   const newQuery = new queryModel({
@@ -37,20 +39,20 @@ const submitQuery = (req, res) => {
     name,
     email,
     mobile,
+    querySubject,
     query,
   });
 
   newQuery
     .save()
     .then((result) => {
-      //console.log(result);
       return res.status(201).json({
         success: true,
         message: "Query Submitted",
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -72,7 +74,7 @@ const getVendors = (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -98,14 +100,13 @@ const addVendor = (req, res) => {
   newVendor
     .save()
     .then((result) => {
-      //console.log(result);
       return res.status(201).json({
         success: true,
         message: "Vendor added",
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -113,6 +114,7 @@ const addVendor = (req, res) => {
     });
 };
 
+//function to update vendor details
 const updateVendor = (req, res) => {
   const updateVendor = new vendorModel({
     name: req.body.name,
@@ -124,14 +126,13 @@ const updateVendor = (req, res) => {
   vendorModel
     .findByIdAndUpdate(req.body._id, updateVendor)
     .then((result) => {
-      //console.log(result);
       return res.status(201).json({
         success: true,
         message: "Vendor updated",
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",
@@ -139,9 +140,10 @@ const updateVendor = (req, res) => {
     });
 };
 
+//function to delete vendor details
 const deleteVendor = (req, res) => {
   vendorModel
-    .deleteOne({ _id: req.body._id })
+    .findByIdAndDelete(req.body._id)
     .then((result) => {
       return res.status(201).json({
         success: true,
@@ -149,7 +151,7 @@ const deleteVendor = (req, res) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Error-" + error);
       return res.status(500).json({
         success: false,
         message: "Internal Server Error",

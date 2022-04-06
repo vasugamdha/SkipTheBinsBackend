@@ -1,3 +1,5 @@
+// Authors: Prashit Patel (B00896717), Vivekkumar Patel (B00896765)
+
 const vendorSchedules = require("../models/vendorSchedules");
 const moment = require("moment");
 const mongoose = require("mongoose");
@@ -21,7 +23,7 @@ const getSchedule = async (req, res) => {
         }
       } catch (err) {
         res.statusCode = 500;
-        res.send({ message: "Schedules retrival failed!" });
+        res.send({ message: "Schedules retrieval failed!" });
       }
     })
     .catch((err) => {
@@ -30,7 +32,7 @@ const getSchedule = async (req, res) => {
     });
 };
 
-const createSChedule = async (req, res) => {
+const createSchedule = async (req, res) => {
   try {
     let successCount = 0;
     let errorCount = 0;
@@ -52,7 +54,7 @@ const createSChedule = async (req, res) => {
           scheduleId: scheduleCount,
           vendorId: req.body.vendorId,
           vendor: req.body.vendor,
-          batchNo: `BATCH${scheduleCount + 1}`,
+          batchNo: `BATCH${scheduleCount}`,
           status: "Waste Pick-up Scheduled",
           date: fromDate,
           area: slots[i].area,
@@ -89,12 +91,6 @@ const updateSchedule = async (req, res) => {
     const id = req.params.id;
 
     const updatedSchedule = {
-      scheduleId: id,
-      vendorId: req.body.vendorId,
-      vendor: req.body.vendor,
-      batchNo: req.body.batchNo,
-      status: "Waste Pick-up Scheduled",
-      date: req.body.date,
       area: req.body.area,
       slot: req.body.slot[0] + " - " + req.body.slot[1],
     };
@@ -141,9 +137,75 @@ const deleteSchedule = async (req, res) => {
   }
 };
 
+const updateStatus = (req, res) => {
+  try {
+    const _id = req.body._id;
+    const status = req.body.status;
+
+    const data = {
+      status,
+    };
+    vendorSchedules.findByIdAndUpdate(_id, data, (err, schedule) => {
+      if (err) {
+        res.statusCode = 500;
+        res.send({ message: "Status update failed!" });
+      } else {
+        res.statusCode = 200;
+        res.send({ message: "Status updated", success: true });
+      }
+    });
+  } catch (err) {
+    res.statusCode = 500;
+    res.send({ message: "Something went wrong!" });
+  }
+};
+
+const addSchedule = async (req, res) => {
+  try {
+    const lastSchedule = await vendorSchedules
+      .findOne()
+      .sort({ field: "asc", _id: -1 })
+      .limit(1);
+    const scheduleCount = lastSchedule ? lastSchedule.scheduleId + 1 : 1;
+    
+    const schedule = new vendorSchedules({
+      _id: mongoose.Types.ObjectId(),
+      scheduleId: scheduleCount,
+      vendorId: req.body.vendorId,
+      vendor: req.body.vendor,
+      batchNo: `BATCH${scheduleCount}`,
+      status: "Waste Pick-up Scheduled",
+      date: req.body.date,
+      area: req.body.area,
+      slot: req.body.slot[0] + " - " + req.body.slot[1],
+    });
+
+    await schedule
+      .save()
+      .then((result) => {
+        res.send({
+          message: `Schedules added successfully`,
+          success: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send({
+          message: `Schedules addition failed`,
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    res.statusCode = 500;
+    res.send({ message: "Something went wrong!" });
+  }
+};
+
 module.exports = {
   getSchedule,
-  createSChedule,
+  createSchedule,
   updateSchedule,
   deleteSchedule,
+  updateStatus,
+  addSchedule,
 };

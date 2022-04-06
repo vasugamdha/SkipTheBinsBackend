@@ -1,3 +1,5 @@
+// Authors: Prashit Patel (B00896717), Vivekkumar Patel (B00896765)
+
 const mongoose = require("mongoose");
 
 const vendorSchedulesSchema = {
@@ -12,4 +14,4 @@ const vendorSchedulesSchema = {
   slot: { type: String },
 };
 
-module.exports = mongoose.model("VendorSchedules", vendorSchedulesSchema);
+module.exports = mongoose.model("vendorSchedules", vendorSchedulesSchema);

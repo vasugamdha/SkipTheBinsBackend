@@ -1,3 +1,5 @@
+// Author: Prashit Patel (B00896717)
+
 const areas = require("../models/areas");
 
 const getArea = async (req, res) => {
