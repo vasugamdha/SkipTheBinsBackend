@@ -88,6 +88,7 @@ const cancelPickup = async (req, res) => {
   }
 };
 
+//Track status of the pickup
 const trackStatus = (req, res) => {
   vendorSchedules
     .find(req.query)

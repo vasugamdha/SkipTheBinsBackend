@@ -2,6 +2,7 @@
 
 const mongoose = require("mongoose");
 
+//Vendor Schedule Schema
 const vendorSchedulesSchema = {
   _id: mongoose.Schema.Types.ObjectId,
   scheduleId: { type: Number },
