@@ -54,7 +54,10 @@ const getRewardPoints = (req, res) => {
 //function to update reward points
 const updateRewardPoints = (req, res) => {
   rewardPointsModel
-    .findByIdAndUpdate(req.body._id, { points: req.body.points })
+    .findOneAndUpdate(
+      { customerId: req.body.customerId },
+      { points: req.body.points }
+    )
     .then((result) => {
       return res.status(201).json({
         success: true,
