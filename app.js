@@ -21,6 +21,7 @@ const contactUsRoutes = require("./routes/contactUsRoutes");
 const rewardStoreRoutes = require("./routes/rewardStoreRoutes");
 const userRoutes = require("./routes/userRoute.js");
 const vendorRoutes = require("./routes/adminRoute.js");
+const eventRoutes = require("./routes/eventsRoutes");
 
 databaseConnection();
 
@@ -35,7 +36,9 @@ app.use(rootRoute, rewardStoreRoutes);
 
 app.use(rootRoute + 'adminActions', vendorRoutes);
 app.use(rootRoute + 'profile', userRoutes);
+app.use(rootRoute + "event", eventRoutes);
 app.use('/', (req, res) => {
     res.send('Welcome to Skip the Bins!!');
 });
+
 module.exports = app;
