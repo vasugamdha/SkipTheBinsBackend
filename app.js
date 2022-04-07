@@ -22,23 +22,24 @@ const rewardStoreRoutes = require("./routes/rewardStoreRoutes");
 const userRoutes = require("./routes/userRoute.js");
 const vendorRoutes = require("./routes/adminRoute.js");
 const eventRoutes = require("./routes/eventsRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 databaseConnection();
 
 const rootRoute = "/api/";
 app.use(rootRoute + "faq", faqRoutes);
+app.use(rootRoute + "notification", notificationRoutes);
 app.use(rootRoute + "user", userPickupRoutes);
 app.use(rootRoute + "vendor", vendorScheduleRoutes);
 app.use(rootRoute + "admin", analyticsRoutes);
 app.use(rootRoute, areaRoutes);
 app.use(rootRoute, contactUsRoutes);
 app.use(rootRoute, rewardStoreRoutes);
-
-app.use(rootRoute + 'adminActions', vendorRoutes);
-app.use(rootRoute + 'profile', userRoutes);
 app.use(rootRoute + "event", eventRoutes);
-app.use('/', (req, res) => {
-    res.send('Welcome to Skip the Bins!!');
+app.use(rootRoute + "adminActions", vendorRoutes);
+app.use(rootRoute + "profile", userRoutes);
+app.use("/", (req, res) => {
+  res.send("Welcome to Skip the Bins!!");
 });
 
 module.exports = app;
