@@ -79,7 +79,7 @@ const createSchedule = async (req, res) => {
 
     res.statusCode = 200;
     res.send({
-      message: `${successCount} schedules successfully created and ${errorCount} errored out`,
+      message: `${successCount} schedules successfully created.`,
       success: true,
     });
   } catch (err) {
