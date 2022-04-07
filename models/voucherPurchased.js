@@ -8,6 +8,8 @@ const querySchema = {
   points: { type: Number },
   customerId: { type: String },
   datePurchased: { type: String },
+  refNumber: { type: String },
+  email: { type: String },
 };
 
 module.exports = mongoose.model("VouchersPurchased", querySchema);

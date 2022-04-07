@@ -33,6 +33,7 @@ const submitQuery = (req, res) => {
   var mobile = req.body.mobile;
   var querySubject = req.body.querySubject;
   var query = req.body.query;
+  var refNumber = req.body.refNumber;
 
   const newQuery = new queryModel({
     _id: new mongoose.Types.ObjectId(),
@@ -41,7 +42,8 @@ const submitQuery = (req, res) => {
     mobile,
     querySubject,
     query,
-    points: 0
+    points: 0,
+    refNumber,
   });
 
   newQuery

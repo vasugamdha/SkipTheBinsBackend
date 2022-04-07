@@ -79,7 +79,9 @@ const purchaseVoucher = (req, res) => {
   var value = req.body.value;
   var points = req.body.points;
   var customerId = req.body.customerId;
+  var email = req.body.email;
   var datePurchased = req.body.datePurchased;
+  var refNumber = req.body.refNumber;
 
   const newVoucher = new voucherPurchasedModel({
     _id: new mongoose.Types.ObjectId(),
@@ -87,7 +89,9 @@ const purchaseVoucher = (req, res) => {
     value,
     points,
     customerId,
+    email,
     datePurchased,
+    refNumber,
   });
 
   newVoucher
