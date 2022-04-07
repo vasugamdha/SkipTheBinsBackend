@@ -23,7 +23,11 @@ const NotificationSchema = new mongoose.Schema({
     enum: ["notification", "announcement"],
     required: true,
   },
-  author: {
+  authorId: {
+    type: String,
+    required: true,
+  },
+  authorRole: {
     type: String,
     required: true,
   },
