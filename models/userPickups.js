@@ -2,6 +2,7 @@
 
 const mongoose = require("mongoose");
 
+//User Pickup Schema
 const userPickupSchema = {
   _id: mongoose.Schema.Types.ObjectId,
   userId: { type: String },

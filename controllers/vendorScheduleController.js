@@ -140,6 +140,7 @@ const deleteSchedule = async (req, res) => {
   }
 };
 
+//Update pickup status
 const updateStatus = async (req, res) => {
   try {
     const _id = req.body._id;
