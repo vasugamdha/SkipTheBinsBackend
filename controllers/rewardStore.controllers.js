@@ -34,11 +34,16 @@ const getRewardPoints = (req, res) => {
   rewardPointsModel
     .find(req.query)
     .then((result) => {
-      if (rewardPointsModel || rewardPointsModel.length) {
+      if (result && result.length > 0) {
         return res.status(200).json({
           success: true,
           message: "Reward points retreived",
           rewardData: result,
+        });
+      } else {
+        return res.status(200).json({
+          success: false,
+          message: "No Reward points found",
         });
       }
     })
