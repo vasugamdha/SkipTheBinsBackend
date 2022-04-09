@@ -7,6 +7,7 @@ const userPickups = require("../models/userPickups");
 const User = require("../models/userModel.js");
 const rewardPointsModel = require("../models/rewardPoints");
 
+//controller to get vendor schedules
 const getSchedule = async (req, res) => {
   vendorSchedules
     .find(req.query)
@@ -35,6 +36,7 @@ const getSchedule = async (req, res) => {
     });
 };
 
+//controller to create vendor schedule
 const createSchedule = async (req, res) => {
   try {
     let successCount = 0;
@@ -89,6 +91,7 @@ const createSchedule = async (req, res) => {
   }
 };
 
+//controller to edit vendor schedule
 const updateSchedule = async (req, res) => {
   try {
     const id = req.params.id;
@@ -122,6 +125,7 @@ const updateSchedule = async (req, res) => {
   }
 };
 
+//controller to delete vendor schedule
 const deleteSchedule = async (req, res) => {
   try {
     const id = req.params.id;
@@ -217,6 +221,7 @@ const updateStatus = async (req, res) => {
   }
 };
 
+//controller to add individual vendor schedule
 const addSchedule = async (req, res) => {
   try {
     const lastSchedule = await vendorSchedules

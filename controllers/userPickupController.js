@@ -4,6 +4,7 @@ const userPickups = require("../models/userPickups");
 const vendorSchedules = require("../models/vendorSchedules");
 const mongoose = require("mongoose");
 
+//controller to get user pickups
 const getPickups = async (req, res) => {
   userPickups
     .find(req.query)
@@ -27,6 +28,7 @@ const getPickups = async (req, res) => {
     });
 };
 
+//controller to create user pickups
 const schedulePickups = async (req, res) => {
   try {
     let pickupCount;
@@ -70,6 +72,7 @@ const schedulePickups = async (req, res) => {
   }
 };
 
+//controller to cancel user pickups
 const cancelPickup = async (req, res) => {
   try {
     const id = req.params.id;
@@ -117,6 +120,7 @@ const trackStatus = (req, res) => {
     });
 };
 
+//controller to edit user pickups
 const updatePickup = async (req, res) => {
   try {
     const id = req.params.id;

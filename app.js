@@ -29,7 +29,11 @@ databaseConnection();
 const rootRoute = "/api/";
 app.use(rootRoute + "faq", faqRoutes);
 app.use(rootRoute + "notification", notificationRoutes);
+
+//user pickup routes
 app.use(rootRoute + "user", userPickupRoutes);
+
+//vendor schedule routes
 app.use(rootRoute + "vendor", vendorScheduleRoutes);
 app.use(rootRoute + "admin", analyticsRoutes);
 app.use(rootRoute, areaRoutes);
