@@ -1,15 +1,18 @@
-// @author : Vasu Gamdha (Group 14)
+/**
+ *   @author : Vasu Gamdha (B00902737)
+ */
 
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel.js");
 
+/**
+ * @description: Middleware to check if the user is authenticated.
+ */
 auth = async (req, res, next) => {
   try {
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(" ")[1];
-      // console.log(req.headers)
       let decodedData = jwt.verify(token, "Group14");
-      // req.userId = decodedData?.id;
       if (decodedData?.id) {
         const userExists = await User.findOne({ _id: decodedData?.id });
         if (!userExists)
