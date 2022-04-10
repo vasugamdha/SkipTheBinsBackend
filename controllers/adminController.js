@@ -1,4 +1,6 @@
-// @author : Vasu Gamdha (Group 14)
+/**
+ *   @author : Vasu Gamdha (B00902737)
+ */
 
 const mongoose = require("mongoose");
 
@@ -6,6 +8,9 @@ const transporter = require("../mailer/transporter.js");
 
 const User = require("../models/userModel.js");
 
+/**
+ * @description: Fetches the list of all the vendors who have requested for account creation.
+ */
 const getUnapprovedVendorList = async (req, res) => {
   try {
     const unapprovedVendorList = await User.find({
@@ -18,6 +23,10 @@ const getUnapprovedVendorList = async (req, res) => {
   }
 };
 
+/**
+ * @description: Approves vendor's account creation request.
+ * Allows vendor to access their account.
+ */
 const approveVendorProfile = async (req, res) => {
   const { id: _id } = req.params;
   try {
@@ -47,6 +56,9 @@ const approveVendorProfile = async (req, res) => {
   }
 };
 
+/**
+ * @description: Fetches the list of all the vendors who have requested for account deletion.
+ */
 const getVendorDeletionRequestList = async (req, res) => {
   try {
     const deletionRequestList = await User.find({
@@ -59,6 +71,10 @@ const getVendorDeletionRequestList = async (req, res) => {
   }
 };
 
+/**
+ * @description: Creates a request to delete account of a vendor
+ * Admin;s approval is required to delete the account.
+ */
 const requestVendorDeletion = async (req, res) => {
   const { id: _id } = req.params;
   try {
@@ -89,6 +105,10 @@ const requestVendorDeletion = async (req, res) => {
   }
 };
 
+/**
+ * @description: Declines vendor's account deletion request.
+ * Vendor cannot delete their account without admin's permission.
+ */
 const declineVendorDeletion = async (req, res) => {
   const { id: _id } = req.params;
   try {
@@ -119,6 +139,10 @@ const declineVendorDeletion = async (req, res) => {
   }
 };
 
+/**
+ * @description: Declines vendor's account creation request.
+ * Vendor account will not be created.
+ */
 const declineVendorCreation = async (req, res) => {
   const { id: _id } = req.params;
 

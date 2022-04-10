@@ -1,7 +1,12 @@
-// @author : Vasu Gamdha (Group 14)
+/**
+ *   @author : Vasu Gamdha (B00902737)
+ */
 
 const nodemailer = require("nodemailer");
 
+/**
+ * @description: A trasporter object to send the emails using nodemailer service.
+ */
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {

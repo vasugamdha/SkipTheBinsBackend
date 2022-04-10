@@ -1,4 +1,6 @@
-// @author : Vasu Gamdha (Group 14)
+/**
+ *   @author : Vasu Gamdha (B00902737)
+ */
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -8,6 +10,9 @@ const transporter = require("../mailer/transporter.js");
 
 const User = require("../models/userModel.js");
 
+/**
+ * @description: This function is used to verify the user's email address.
+ */
 const verifyAccount = async (req, res) => {
   const { verificationCode } = req.params;
   try {
@@ -16,7 +21,7 @@ const verifyAccount = async (req, res) => {
       return res.status(404).send({ message: "User doesn't exist." });
     userExists.isVerified = true;
     await userExists.save();
-    htmlContent =`<html><head><meta http-equiv='Refresh' content="0; url='https://skipthebins.herokuapp.com/login'" /><link
+    htmlContent = `<html><head><meta http-equiv='Refresh' content="0; url='https://skipthebins.herokuapp.com/login'" /><link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -29,6 +34,9 @@ const verifyAccount = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to get the user's profile details and creates a token for the user logged in.
+ */
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -36,7 +44,11 @@ const login = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (!userExists)
-      return res.status(404).json({ message: "This email address is not linked with any account!" });
+      return res
+        .status(404)
+        .json({
+          message: "This email address is not linked with any account!",
+        });
 
     if (
       userExists.role === "vendor" &&
@@ -55,7 +67,9 @@ const login = async (req, res) => {
     );
 
     if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Either email or password is incorrect." });
+      return res
+        .status(400)
+        .json({ message: "Either email or password is incorrect." });
 
     const token = jwt.sign(
       { email: userExists.email, id: userExists._id },
@@ -69,6 +83,10 @@ const login = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to create a user profile (normal user and vendor account).
+ * It also sends an email to the user to verify the account.
+ */
 const signup = async (req, res) => {
   const {
     email,
@@ -89,7 +107,12 @@ const signup = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (userExists)
-      return res.status(400).json({ message: "This email address is already linked with an account! Try logging in!" });
+      return res
+        .status(400)
+        .json({
+          message:
+            "This email address is already linked with an account! Try logging in!",
+        });
 
     if (password !== confirmPassword)
       res.status(400).json({ message: "Passwords don't match." });
@@ -141,6 +164,9 @@ const signup = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to update the user's profile details.
+ */
 const editProfile = async (req, res) => {
   const { id: _id } = req.params;
   const newDetails = req.body;
@@ -161,6 +187,9 @@ const editProfile = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to modify user's password.
+ */
 const changePassword = async (req, res) => {
   const { id: _id } = req.params;
   const { email, currentPassword, newPassword } = req.body;
@@ -189,7 +218,10 @@ const changePassword = async (req, res) => {
     if (isNewSameAsCurrent)
       return res
         .status(400)
-        .json({ message: "Please enter a new password different from your current password!" });
+        .json({
+          message:
+            "Please enter a new password different from your current password!",
+        });
 
     const newHashedPassword = await bcrypt.hash(newPassword, 12);
 
@@ -205,6 +237,11 @@ const changePassword = async (req, res) => {
   }
 };
 
+/**\
+ * @description: This function is used to delete the user's account permanently.
+ * A normal user can delete their account anytime.
+ * A vendor can only delete their account after admin approval.
+ */
 const deleteProfile = async (req, res) => {
   const { id: _id } = req.params;
 
@@ -220,12 +257,11 @@ const deleteProfile = async (req, res) => {
   }
 };
 
-
 module.exports = {
-    signup,
-    login,
-    verifyAccount,
-    changePassword,
-    editProfile,
-    deleteProfile
-}
+  signup,
+  login,
+  verifyAccount,
+  changePassword,
+  editProfile,
+  deleteProfile,
+};
