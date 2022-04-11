@@ -4,7 +4,7 @@ const router = express.Router();
 const faqController = require("../controllers/faqController");
 const faqRequestController = require("../controllers/faqRequestController");
 const auth = require("../middlewares/authMiddleware.js");
-
+// routes for faqs
 router.get("/", faqController.getFaq);
 
 router.post("/", auth, faqController.createFaq);

@@ -2,6 +2,7 @@
 const faq = require("../models/faqModel");
 
 const getFaq = (req, res) => {
+  // fetching faqs
   faq
     .find()
     .then((_) => {
@@ -15,6 +16,7 @@ const getFaq = (req, res) => {
 };
 
 const deleteFaq = (req, res) => {
+  // deleting faqs
   let id = req.params.id;
   faq
     .findByIdAndDelete(id)
@@ -29,6 +31,7 @@ const deleteFaq = (req, res) => {
 };
 
 const createFaq = (req, res) => {
+  // adding faqs
   faq
     .create(req.body)
     .then((_) => {
@@ -42,6 +45,7 @@ const createFaq = (req, res) => {
 };
 
 const updateFaq = (req, res) => {
+  // udating faqs
   res.body;
   faq
     .findByIdAndUpdate(req.params.id, req.body)

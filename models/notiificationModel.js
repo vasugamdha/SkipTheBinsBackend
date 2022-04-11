@@ -1,6 +1,6 @@
 // Author : Aabhaas Jain
 const mongoose = require("mongoose");
-
+// schema for notification and announcements
 const NotificationSchema = new mongoose.Schema({
   user: {
     type: String,

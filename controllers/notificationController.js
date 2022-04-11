@@ -2,6 +2,7 @@
 const notification = require("../models/notiificationModel");
 
 const addNotification = (req, res) => {
+  // adding notification/annoncements
   let date = new Date();
   notification
     .create({ ...req.body, timeStamp: date })
@@ -16,6 +17,7 @@ const addNotification = (req, res) => {
 };
 
 const getAllAnnouncements = (req, res) => {
+  // fetching all announcements
   notification
     .find({ type: "announcement" })
     .then((_) => {
@@ -29,6 +31,7 @@ const getAllAnnouncements = (req, res) => {
 };
 
 const getNotificationsById = (req, res) => {
+  //fetch notifications/announcements by user id
   notification
     .find()
     .or([{ user: req.params.id }, { user: "all" }])
@@ -43,6 +46,7 @@ const getNotificationsById = (req, res) => {
 };
 
 const deleteNotification = (req, res) => {
+  // delete notification/announcements
   let id = req.params.id;
   notification
     .findByIdAndDelete(id)

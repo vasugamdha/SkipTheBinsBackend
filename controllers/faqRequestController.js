@@ -3,6 +3,7 @@ const faqRequest = require('../models/faqRequestModel');
 const faq = require('../models/faqModel');
 
 const getRequests = (req, res) => {
+    // fetching faq requests
     faqRequest.find().then(_ => {
         res.status(200).json({ data: _ });
     }).catch(err => {
@@ -13,6 +14,7 @@ const getRequests = (req, res) => {
 };
 
 const createRequest = (req, res) => {
+    // adding faq requests
     faqRequest.create(req.body).then(_ => {
         res.status(200).send("Insertion successful");
     }).catch(err => {
@@ -23,6 +25,7 @@ const createRequest = (req, res) => {
 }
 
 const deleteRequest = (req, res) => {
+    // deleting faq requests
     let id = req.params.id;
     faqRequest.findByIdAndDelete(id).then(_ => {
         res.status(200).send("Deletion successful");
@@ -34,6 +37,7 @@ const deleteRequest = (req, res) => {
 };
 
 const approveRequest = (req, res) => {
+    // approving faq requests
     if (req.body.type == "update") {
         faq.findByIdAndUpdate(req.body.faqId, { question: req.body.newQuestion, answer: req.body.newAnswer }).then(_ => {
             faqRequest.findByIdAndDelete(req.body._id).then(_ => {
