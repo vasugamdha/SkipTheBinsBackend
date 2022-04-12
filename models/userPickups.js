@@ -2,6 +2,7 @@
 
 const mongoose = require("mongoose");
 
+//User Pickup Schema
 const userPickupSchema = {
   _id: mongoose.Schema.Types.ObjectId,
   userId: { type: String },
@@ -15,5 +16,6 @@ const userPickupSchema = {
   wasteQty: { type: Number },
   boxQty: { type: Number },
   address: { type: String },
+  points: { type: Number },
 };
 module.exports = mongoose.model("UserPickups", userPickupSchema);

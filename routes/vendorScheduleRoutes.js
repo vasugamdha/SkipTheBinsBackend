@@ -3,17 +3,24 @@
 const express = require("express");
 const router = express.Router();
 const vendorScheduleController = require("../controllers/vendorScheduleController");
+const auth = require("../middlewares/authMiddleware.js");
 
-router.get("/schedules", vendorScheduleController.getSchedule);
+//route to get schedules
+router.get("/schedules", auth, vendorScheduleController.getSchedule);
 
-router.post("/create", vendorScheduleController.createSchedule);
+//route to create schedules
+router.post("/create", auth, vendorScheduleController.createSchedule);
 
-router.put("/update/:id", vendorScheduleController.updateSchedule);
+//route to update schedule
+router.put("/update/:id", auth, vendorScheduleController.updateSchedule);
 
-router.delete("/delete/:id", vendorScheduleController.deleteSchedule);
+//route to delete schedule
+router.delete("/delete/:id", auth, vendorScheduleController.deleteSchedule);
 
-router.put("/schedules/update", vendorScheduleController.updateStatus);
+//route to update status of individual schedule
+router.put("/schedules/update", auth, vendorScheduleController.updateStatus);
 
-router.post("/schedules/add", vendorScheduleController.addSchedule);
+//route ro add new individual schedule
+router.post("/schedules/add", auth, vendorScheduleController.addSchedule);
 
 module.exports = router;

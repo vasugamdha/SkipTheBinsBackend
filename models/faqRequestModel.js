@@ -1,6 +1,6 @@
 // Author : Aabhaas Jain
 const mongoose = require("mongoose");
-
+// FAQ request schema
 const FaqRequestSchema = new mongoose.Schema({
     oldQuestion: {
         type: String

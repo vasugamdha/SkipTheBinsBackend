@@ -6,7 +6,10 @@ const querySchema = {
   name: { type: String },
   email: { type: String },
   mobile: { type: String },
+  querySubject: { type: String },
   query: { type: String },
+  points: { type: Number },
+  refNumber: { type: String },
 };
 
 module.exports = mongoose.model("ContactUsQuery", querySchema);

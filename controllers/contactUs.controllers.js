@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 
 var queryModel = require("../models/contactUsQuery");
 var vendorModel = require("../models/contactUsVendor");
-const { param } = require("../routes/contactUsRoutes");
 
 //function to fetch all queries in GET call
 const getQueries = (req, res) => {
@@ -32,14 +31,19 @@ const submitQuery = (req, res) => {
   var name = req.body.name;
   var email = req.body.email;
   var mobile = req.body.mobile;
+  var querySubject = req.body.querySubject;
   var query = req.body.query;
+  var refNumber = req.body.refNumber;
 
   const newQuery = new queryModel({
     _id: new mongoose.Types.ObjectId(),
     name,
     email,
     mobile,
+    querySubject,
     query,
+    points: 0,
+    refNumber,
   });
 
   newQuery

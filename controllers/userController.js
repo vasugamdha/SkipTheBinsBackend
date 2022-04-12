@@ -1,4 +1,6 @@
-// @author : Vasu Gamdha (Group 14)
+/**
+ *   @author : Vasu Gamdha (B00902737)
+ */
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -8,6 +10,9 @@ const transporter = require("../mailer/transporter.js");
 
 const User = require("../models/userModel.js");
 
+/**
+ * @description: This function is used to verify the user's email address.
+ */
 const verifyAccount = async (req, res) => {
   const { verificationCode } = req.params;
   try {
@@ -16,13 +21,22 @@ const verifyAccount = async (req, res) => {
       return res.status(404).send({ message: "User doesn't exist." });
     userExists.isVerified = true;
     await userExists.save();
-    htmlContent ="<html><body><h1>Account Verified! </h1> <a href='https://skipthebins.herokuapp.com/login'>Click here to Login</Button></body></html>";
+    htmlContent = `<html><head><meta http-equiv='Refresh' content="0; url='https://skipthebins.herokuapp.com/login'" /><link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous"
+  />
+    </head><body><div className="border d-flex align-items-center justify-content-center"><h1>Account Verified!</h1> <h5>If not redirected, <Button href='https://skipthebins.herokuapp.com/login'>Click here to Login</Button></h5></div></body></html>`;
     res.status(200).send(htmlContent);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
 
+/**
+ * @description: This function is used to get the user's profile details and creates a token for the user logged in.
+ */
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -30,18 +44,22 @@ const login = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (!userExists)
-      return res.status(404).json({ message: "User doesn't exist." });
+      return res
+        .status(404)
+        .json({
+          message: "This email address is not linked with any account!",
+        });
 
     if (
       userExists.role === "vendor" &&
       !userExists.isApprovedByAdminIfVendorRole
     )
       return res
-        .status(404)
-        .json({ message: "Your Vendor Id is not yet verified by Admin." });
+        .status(401)
+        .json({ message: "Please, wait for admin to approve your account." });
 
     if (!userExists.isVerified)
-      return res.status(400).json({ message: "Account is not verified." });
+      return res.status(400).json({ message: "Please, verify your account!" });
 
     const isPasswordCorrect = await bcrypt.compare(
       password,
@@ -49,7 +67,9 @@ const login = async (req, res) => {
     );
 
     if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Invalid credentials." });
+      return res
+        .status(400)
+        .json({ message: "Either email or password is incorrect." });
 
     const token = jwt.sign(
       { email: userExists.email, id: userExists._id },
@@ -63,6 +83,10 @@ const login = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to create a user profile (normal user and vendor account).
+ * It also sends an email to the user to verify the account.
+ */
 const signup = async (req, res) => {
   const {
     email,
@@ -83,7 +107,12 @@ const signup = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (userExists)
-      return res.status(400).json({ message: "User already exist." });
+      return res
+        .status(400)
+        .json({
+          message:
+            "This email address is already linked with an account! Try logging in!",
+        });
 
     if (password !== confirmPassword)
       res.status(400).json({ message: "Passwords don't match." });
@@ -135,13 +164,16 @@ const signup = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to update the user's profile details.
+ */
 const editProfile = async (req, res) => {
   const { id: _id } = req.params;
   const newDetails = req.body;
 
   try {
     if (!mongoose.Types.ObjectId.isValid(_id))
-      return res.status(404).send("No user with that id");
+      return res.status(404).send("The user doesn't exist.");
 
     const updatedUserDetails = await User.findByIdAndUpdate(
       _id,
@@ -155,6 +187,9 @@ const editProfile = async (req, res) => {
   }
 };
 
+/**
+ * @description: This function is used to modify user's password.
+ */
 const changePassword = async (req, res) => {
   const { id: _id } = req.params;
   const { email, currentPassword, newPassword } = req.body;
@@ -163,7 +198,7 @@ const changePassword = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (!userExists)
-      return res.status(400).json({ message: "User doesn't exist." });
+      return res.status(400).json({ message: "The user doesn't exist." });
 
     const isPasswordCorrect = await bcrypt.compare(
       currentPassword,
@@ -173,7 +208,7 @@ const changePassword = async (req, res) => {
     if (!isPasswordCorrect)
       return res
         .status(400)
-        .json({ message: "Current password is incorrect." });
+        .json({ message: "Your current password is incorrect." });
 
     const isNewSameAsCurrent = await bcrypt.compare(
       newPassword,
@@ -183,7 +218,10 @@ const changePassword = async (req, res) => {
     if (isNewSameAsCurrent)
       return res
         .status(400)
-        .json({ message: "New password is same as current password." });
+        .json({
+          message:
+            "Please enter a new password different from your current password!",
+        });
 
     const newHashedPassword = await bcrypt.hash(newPassword, 12);
 
@@ -199,6 +237,11 @@ const changePassword = async (req, res) => {
   }
 };
 
+/**\
+ * @description: This function is used to delete the user's account permanently.
+ * A normal user can delete their account anytime.
+ * A vendor can only delete their account after admin approval.
+ */
 const deleteProfile = async (req, res) => {
   const { id: _id } = req.params;
 
@@ -214,12 +257,11 @@ const deleteProfile = async (req, res) => {
   }
 };
 
-
 module.exports = {
-    signup,
-    login,
-    verifyAccount,
-    changePassword,
-    editProfile,
-    deleteProfile
-}
+  signup,
+  login,
+  verifyAccount,
+  changePassword,
+  editProfile,
+  deleteProfile,
+};
