@@ -1,5 +1,8 @@
 # Project - Skip The Bins
 
+* *Frontend Git URL*: <https://github.com/vasugamdha/SkipTheBins> 
+* *Backend Git URL*: <https://github.com/vasugamdha/SkipTheBinsBackend>
+  
 * Project - Skip the bins : Recyclable waste management system
 The project gives a common platform for the vendors who recycle waste and the users who wants to submit their waste to those vendors. Users will schedule a waste pickup from this website, track the pickup and will receive rewards based on the amount of waste given. Users can see history of their submissions. Vendors can schedule pickups and award rewards to users. Both users and vendors can see staticstics of the waste submissions.
 
